@@ -25,15 +25,6 @@ export class RecipeService {
         new Ingredient('hot dog', 2),
         new Ingredient('burger', 2),
       ]
-    ),
-    new Recipe(
-      'Third Test Recipe',
-      'This is simply a test',
-      'https://cdn.cnn.com/cnnnext/dam/assets/170308101225-fruit-stock-exlarge-169.jpg',
-      [
-        new Ingredient('flour', 4),
-        new Ingredient('yeast', 1),
-      ]
     )
   ];
 
@@ -43,6 +34,10 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice(); // returns a new array so can't get from outside
+  }
+
+  getRecipe(index: number) {
+    return this.recipes[index];
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
