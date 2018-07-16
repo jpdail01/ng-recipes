@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from '../../../node_modules/rxjs';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Injectable()
 export class RecipeService {
@@ -13,24 +14,23 @@ export class RecipeService {
       'A Test Recipe',
       'This is simply a test',
       'https://cdn.cnn.com/cnnnext/dam/assets/170308101225-fruit-stock-exlarge-169.jpg',
-      [
-        new Ingredient('apple', 5),
-        new Ingredient('orange', 3),
-      ]
+      [new Ingredient('apple', 5), new Ingredient('orange', 3)]
     ),
     new Recipe(
       'Another Test Recipe',
       'This is simply a test',
       'https://cdn.cnn.com/cnnnext/dam/assets/170308101225-fruit-stock-exlarge-169.jpg',
-      [
-        new Ingredient('hot dog', 2),
-        new Ingredient('burger', 2),
-      ]
+      [new Ingredient('hot dog', 2), new Ingredient('burger', 2)]
     )
   ];
 
-  constructor(private shoppingListService: ShoppingListService) {
+  constructor(
+    private shoppingListService: ShoppingListService
+  ) {}
 
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   getRecipes() {
